@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Eye,
+  Globe,
 } from "lucide-react";
 
 type ProjectStatus = "active" | "in-progress" | "done";
@@ -25,6 +26,7 @@ interface Project {
   type: ProjectType;
   github?: string;
   docs?: string[];
+  uri?: string;
   media: MediaItem[];
 }
 
@@ -47,6 +49,7 @@ const projects: Project[] = [
     type: "Web",
     github: "https://github.com/nxhuel/aula-virtual-backend",
     docs: ["/doc/aula_virtual_doc.pdf"],
+    uri: "https://aula-virtual-ifts.vercel.app/",
     media: [
       { type: "image", src: "/videos/pp-aulavirtual.gif" },
       { type: "image", src: "/images/pp-aulavirtual-uno.png" },
@@ -111,7 +114,11 @@ const projects: Project[] = [
     ],
     status: "done",
     type: "Web",
-    media: [{ type: "image", src: "/videos/pp-suAgip.gif" }, { type: "image", src: "/images/pp-suAgip-uno.png" }, { type: "video", src: "/videos/pp-suAgip.mp4" }],
+    media: [
+      { type: "image", src: "/videos/pp-suAgip.gif" },
+      { type: "image", src: "/images/pp-suAgip-uno.png" },
+      { type: "video", src: "/videos/pp-suAgip.mp4" },
+    ],
   },
   {
     name: "Encriptador de Texto",
@@ -327,6 +334,18 @@ const ProjectPortal = () => {
                       <FileText size={14} /> Docs
                     </button>
                   )}
+
+                  {project.uri && (
+                    <a
+                      href={project.uri}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-secondary hover:bg-primary/10 hover:text-primary transition-colors font-mono"
+                    >
+                      <Globe size={14} /> Acceso
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -460,6 +479,17 @@ const ProjectPortal = () => {
                   >
                     <FileText size={16} /> Documentación
                   </button>
+                )}
+                {showcase.uri && (
+                  <a
+                    href={showcase.uri}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-secondary hover:bg-primary/10 hover:text-primary transition-colors font-mono"
+                  >
+                    <Globe size={16} /> Acceso al Sistema
+                  </a>
                 )}
               </div>
             </div>
