@@ -1,4 +1,4 @@
-# 📦 Core Design System & Modular React Architecture
+# myportafolio
 
 Este repositorio contiene la biblioteca de componentes UI, hooks personalizados y la arquitectura base desarrollada en React. El sistema está diseñado bajo principios de ingeniería de software modernos para garantizar la escalabilidad, mantenibilidad y reusabilidad en múltiples frentes de trabajo.
 
@@ -132,4 +132,3 @@ Para generar el build de producción:
 
 bash
 npm run build
-# myportafolio
