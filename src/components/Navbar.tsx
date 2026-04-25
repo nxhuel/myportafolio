@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown, Terminal } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Menu, X, ChevronDown, Terminal, FileText } from "lucide-react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 const aboutPages = [
   { label: "Quién soy", to: "/about" },
@@ -8,10 +8,15 @@ const aboutPages = [
   { label: "Formación profesional", to: "/education" },
 ];
 
+const myWorkPage = [
+  { label: "Proyectos & Servicios", to: "/my-work" }
+];
+
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [workOpen, setWorkOpen] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === "/";
 
@@ -24,14 +29,12 @@ const Navbar = () => {
   const navLinks = isHome
     ? [
         { label: "Inicio", href: "#home" },
-        { label: "Soluciones", href: "#solutions" },
-        { label: "Proyectos", href: "#projects" },
+        { label: "Guías", href: "#guides" },
         { label: "Contacto", href: "#contact" },
       ]
     : [
         { label: "Inicio", href: "/" },
-        { label: "Soluciones", href: "#solutions" },
-        { label: "Proyectos", href: "/#projects" }, 
+        { label: "Guías", href: "/#guides" },
         { label: "Contacto", href: "/#contact" },
       ];
 
@@ -80,8 +83,43 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop */}
+
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map(renderLink)}
+
+          <div className="relative">
+            <button
+              onClick={() => setWorkOpen(!workOpen)}
+              onBlur={() => setTimeout(() => setWorkOpen(false), 200)}
+              className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors duration-200 tracking-wide uppercase font-mono"
+            >
+              Mi trabajo
+              <ChevronDown
+                size={14}
+                className={`transition-transform ${workOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+            {workOpen && (
+              <div className="absolute top-full right-0 mt-3 w-56 glass rounded-lg border border-border overflow-hidden animate-fade-up">
+                {myWorkPage.map((s) => (
+                  <NavLink
+                    key={s.to}
+                    to={s.to}
+                    className={({ isActive }) =>
+                      `block px-5 py-3 text-sm transition-colors font-mono ${
+                        isActive
+                          ? "text-primary bg-primary/5"
+                          : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                      }`
+                    }
+                    onClick={() => setWorkOpen(false)}
+                  >
+                    {s.label}
+                  </NavLink>
+                ))}
+              </div>
+            )}
+          </div>
 
           <div className="relative">
             <button
@@ -98,14 +136,20 @@ const Navbar = () => {
             {aboutOpen && (
               <div className="absolute top-full right-0 mt-3 w-56 glass rounded-lg border border-border overflow-hidden animate-fade-up">
                 {aboutPages.map((s) => (
-                  <Link
+                  <NavLink
                     key={s.to}
                     to={s.to}
-                    className="block px-5 py-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors font-mono"
+                    className={({ isActive }) =>
+                      `block px-5 py-3 text-sm transition-colors font-mono ${
+                        isActive
+                          ? "text-primary bg-primary/5"
+                          : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                      }`
+                    }
                     onClick={() => setAboutOpen(false)}
                   >
                     {s.label}
-                  </Link>
+                  </NavLink>
                 ))}
               </div>
             )}
@@ -149,14 +193,20 @@ const Navbar = () => {
                 Sobre mí
               </p>
               {aboutPages.map((s) => (
-                <Link
+                <NavLink
                   key={s.to}
                   to={s.to}
-                  className="block text-sm text-muted-foreground hover:text-primary py-2 pl-4 font-mono"
+                  className={({ isActive }) =>
+                    `block text-sm py-2 pl-4 font-mono ${
+                      isActive
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-primary"
+                    }`
+                  }
                   onClick={() => setMobileOpen(false)}
                 >
                   {s.label}
-                </Link>
+                </NavLink>
               ))}
             </div>
           </div>

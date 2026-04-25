@@ -1,13 +1,23 @@
-import { User, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import Navbar from '@/components/Navbar';
+import { User, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
+import Navbar from "@/components/Navbar";
 
 const WhoAmI = () => (
-  <div className="min-h-screen">
+  <div
+    className="min-h-screen bg-black/80 bg-transparente bg-blend-overlay"
+    style={{
+      backgroundImage: "url('/images/fondo-proyectos.png')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}
+  >
     <Navbar />
     <section className="pt-24 pb-20">
       <div className="container mx-auto px-4 max-w-3xl">
-        <Link to="/" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors mb-8 font-mono">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors mb-8 font-mono"
+        >
           <ArrowLeft size={12} /> cd ~/home
         </Link>
 
@@ -16,20 +26,26 @@ const WhoAmI = () => (
             <User size={16} className="text-primary" />
           </div>
           <div>
-            <p className="text-primary font-mono text-[10px] tracking-widest uppercase neon-text">~/about</p>
-            <h1 className="text-2xl font-bold font-sans tracking-tight">Quién soy</h1>
+            <p className="text-primary font-mono text-[10px] tracking-widest uppercase neon-text">
+              ~/about
+            </p>
+            <h1 className="text-2xl font-bold font-sans tracking-tight">
+              Quién soy
+            </h1>
           </div>
         </div>
 
         <div className="glass rounded p-6 space-y-4">
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Soy Nahuel Tisera, desarrollador de software con enfoque en backend y arquitectura de sistemas.
-            Me apasiona construir soluciones robustas, seguras y escalables. Trabajo con tecnologías modernas
-            y siempre busco la mejor práctica para cada problema.
+            Soy Nahuel Tisera, desarrollador de software con enfoque en backend
+            y arquitectura de sistemas. Me apasiona construir soluciones
+            robustas, seguras y escalables. Trabajo con tecnologías modernas y
+            siempre busco la mejor práctica para cada problema.
           </p>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Mi trabajo se centra en diseñar APIs bien estructuradas, implementar patrones de seguridad
-            sólidos, y mantener código que otros desarrolladores puedan entender y escalar.
+            Mi trabajo se centra en diseñar APIs bien estructuradas, implementar
+            patrones de seguridad sólidos, y mantener código que otros
+            desarrolladores puedan entender y escalar.
           </p>
           <div className="border-t border-border pt-4 mt-4">
             <p className="text-xs text-muted-foreground font-mono">

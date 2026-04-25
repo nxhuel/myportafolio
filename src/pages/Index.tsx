@@ -1,25 +1,38 @@
-import { useState } from 'react';
-import TerminalLoader from '@/components/TerminalLoader';
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import WhatIResolve from '@/components/WhatIResolve';
-import ProjectPortal from '@/components/ProjectPortal';
-import Contact from '@/components/Contact';
-import { Terminal } from 'lucide-react';
+import { useEffect, useState } from "react";
+import TerminalLoader from "@/components/TerminalLoader";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import MediumSection from "@/components/MediumSection";
+import WhatIResolve from "@/components/WhatIResolve";
+import ProjectPortal from "@/components/ProjectPortal";
+import Contact from "@/components/Contact";
+import { Terminal } from "lucide-react";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const alreadyLoaded = sessionStorage.getItem("loader-shown");
+
+    if (alreadyLoaded) {
+      setLoading(false);
+    }
+  }, []);
+
+  const handleComplete = () => {
+    sessionStorage.setItem("loader-shown", "true");
+    setLoading(false);
+  };
+
   if (loading) {
-    return <TerminalLoader onComplete={() => setLoading(false)} />;
+    return <TerminalLoader onComplete={handleComplete} />;
   }
 
   return (
     <div className="min-h-screen">
       <Navbar />
       <Hero />
-      <WhatIResolve />
-      <ProjectPortal />
+      <MediumSection username="nahueltisera03" />
       <Contact />
 
       <footer className="border-t border-border py-10">
@@ -28,9 +41,7 @@ const Index = () => {
             <Terminal size={16} />
             <span>Nahuel Tisera © {new Date().getFullYear()}</span>
           </div>
-          <p className="text-xs text-muted-foreground font-mono">
-            $ exit
-          </p>
+          <p className="text-xs text-muted-foreground font-mono">$ exit</p>
         </div>
       </footer>
     </div>
