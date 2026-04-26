@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown, Terminal, FileText } from "lucide-react";
+import { Menu, X, ChevronDown, Terminal } from "lucide-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 const aboutPages = [
@@ -9,14 +9,16 @@ const aboutPages = [
 ];
 
 const myWorkPage = [
-  { label: "Proyectos & Servicios", to: "/my-work" }
+  { label: "Servicios & Proyectos", to: "/my-work" },
+  { label: "Guías", to: "/guides" },
 ];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [aboutOpen, setAboutOpen] = useState(false);
   const [workOpen, setWorkOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
+
   const location = useLocation();
   const isHome = location.pathname === "/";
 
@@ -29,12 +31,12 @@ const Navbar = () => {
   const navLinks = isHome
     ? [
         { label: "Inicio", href: "#home" },
-        { label: "Guías", href: "#guides" },
+        { label: "Sobre mí", href: "#about" },
         { label: "Contacto", href: "#contact" },
       ]
     : [
         { label: "Inicio", href: "/" },
-        { label: "Guías", href: "/#guides" },
+        { label: "Sobre mí", href: "/#about" },
         { label: "Contacto", href: "/#contact" },
       ];
 
@@ -44,7 +46,7 @@ const Navbar = () => {
         <a
           key={link.href}
           href={link.href}
-          className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 tracking-wide uppercase font-mono"
+          className="text-sm text-muted-foreground hover:text-primary transition font-mono uppercase tracking-wide"
         >
           {link.label}
         </a>
@@ -54,7 +56,7 @@ const Navbar = () => {
       <Link
         key={link.href}
         to={link.href}
-        className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 tracking-wide uppercase font-mono"
+        className="text-sm text-muted-foreground hover:text-primary transition font-mono uppercase tracking-wide"
       >
         {link.label}
       </Link>
@@ -63,92 +65,44 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 w-full z-50 transition-all ${
         scrolled ? "glass border-b border-border" : "bg-transparent"
       }`}
     >
-      <div
-        className="max-w-7xl mx-auto px-6 sm:px-10 h-18 flex items-center justify-between"
-        style={{ height: "4.5rem" }}
-      >
-        <Link
-          to="/"
-          className="flex items-center gap-2.5 text-primary neon-text font-bold text-base"
-        >
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between h-16">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2 text-primary font-bold">
           <Terminal size={20} />
-          <span className="font-mono text-lg">N.Tisera</span>
-          <span className="text-muted-foreground text-xs font-normal hidden sm:inline font-mono">
-            ~/portfolio
-          </span>
+          <span className="font-mono">N.Tisera</span>
         </Link>
 
         {/* Desktop */}
-
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map(renderLink)}
 
+          {/* Mi trabajo */}
           <div className="relative">
             <button
-              onClick={() => setWorkOpen(!workOpen)}
-              onBlur={() => setTimeout(() => setWorkOpen(false), 200)}
-              className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors duration-200 tracking-wide uppercase font-mono"
+              onClick={() => {
+                setWorkOpen(!workOpen);
+                setAboutOpen(false);
+              }}
+              className="flex items-center gap-1 text-sm font-mono uppercase text-muted-foreground hover:text-primary"
             >
               Mi trabajo
-              <ChevronDown
-                size={14}
-                className={`transition-transform ${workOpen ? "rotate-180" : ""}`}
-              />
+              <ChevronDown size={14} className={workOpen ? "rotate-180" : ""} />
             </button>
+
             {workOpen && (
-              <div className="absolute top-full right-0 mt-3 w-56 glass rounded-lg border border-border overflow-hidden animate-fade-up">
-                {myWorkPage.map((s) => (
+              <div className="absolute right-0 mt-2 w-52 glass border border-border rounded-lg overflow-hidden">
+                {myWorkPage.map((item) => (
                   <NavLink
-                    key={s.to}
-                    to={s.to}
-                    className={({ isActive }) =>
-                      `block px-5 py-3 text-sm transition-colors font-mono ${
-                        isActive
-                          ? "text-primary bg-primary/5"
-                          : "text-muted-foreground hover:text-primary hover:bg-primary/5"
-                      }`
-                    }
+                    key={item.to}
+                    to={item.to}
+                    className="block px-4 py-2 text-sm font-mono hover:bg-primary/5 hover:text-primary"
                     onClick={() => setWorkOpen(false)}
                   >
-                    {s.label}
-                  </NavLink>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="relative">
-            <button
-              onClick={() => setAboutOpen(!aboutOpen)}
-              onBlur={() => setTimeout(() => setAboutOpen(false), 200)}
-              className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors duration-200 tracking-wide uppercase font-mono"
-            >
-              Sobre mí
-              <ChevronDown
-                size={14}
-                className={`transition-transform ${aboutOpen ? "rotate-180" : ""}`}
-              />
-            </button>
-            {aboutOpen && (
-              <div className="absolute top-full right-0 mt-3 w-56 glass rounded-lg border border-border overflow-hidden animate-fade-up">
-                {aboutPages.map((s) => (
-                  <NavLink
-                    key={s.to}
-                    to={s.to}
-                    className={({ isActive }) =>
-                      `block px-5 py-3 text-sm transition-colors font-mono ${
-                        isActive
-                          ? "text-primary bg-primary/5"
-                          : "text-muted-foreground hover:text-primary hover:bg-primary/5"
-                      }`
-                    }
-                    onClick={() => setAboutOpen(false)}
-                  >
-                    {s.label}
+                    {item.label}
                   </NavLink>
                 ))}
               </div>
@@ -156,24 +110,27 @@ const Navbar = () => {
           </div>
         </div>
 
+        {/* Mobile button */}
         <button
-          className="md:hidden text-foreground"
+          className="md:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
+      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden glass border-t border-border animate-fade-up">
-          <div className="max-w-7xl mx-auto px-6 py-4 space-y-3">
+        <div className="md:hidden glass border-t border-border">
+          <div className="px-6 py-4 space-y-4">
+            {/* Links */}
             {navLinks.map((link) =>
               link.href.startsWith("#") ? (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block text-sm text-muted-foreground hover:text-primary py-2 font-mono uppercase tracking-wide"
                   onClick={() => setMobileOpen(false)}
+                  className="block font-mono uppercase text-sm text-muted-foreground hover:text-primary"
                 >
                   {link.label}
                 </a>
@@ -181,34 +138,31 @@ const Navbar = () => {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="block text-sm text-muted-foreground hover:text-primary py-2 font-mono uppercase tracking-wide"
                   onClick={() => setMobileOpen(false)}
+                  className="block font-mono uppercase text-sm text-muted-foreground hover:text-primary"
                 >
                   {link.label}
                 </Link>
               ),
             )}
-            <div className="border-t border-border pt-3">
-              <p className="text-xs text-primary mb-2 font-mono uppercase tracking-widest">
-                Sobre mí
+
+            {/* Mi trabajo mobile */}
+            <div>
+              <p className="text-xs text-primary font-mono uppercase mb-2">
+                Mi trabajo
               </p>
-              {aboutPages.map((s) => (
-                <NavLink
-                  key={s.to}
-                  to={s.to}
-                  className={({ isActive }) =>
-                    `block text-sm py-2 pl-4 font-mono ${
-                      isActive
-                        ? "text-primary"
-                        : "text-muted-foreground hover:text-primary"
-                    }`
-                  }
+              {myWorkPage.map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
                   onClick={() => setMobileOpen(false)}
+                  className="block text-sm pl-3 py-1 text-muted-foreground hover:text-primary font-mono"
                 >
-                  {s.label}
-                </NavLink>
+                  {item.label}
+                </Link>
               ))}
             </div>
+
           </div>
         </div>
       )}

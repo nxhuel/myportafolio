@@ -9,10 +9,22 @@ const mockArticles: MediumArticle[] = [
     description: "En este artículo, exploraremos cómo diseñar, documentar, construir y ejecutar APIs escalables desde lo básico hasta lo avanzado.",
     content: "En este artículo, exploraremos cómo diseñar, documentar, construir y ejecutar APIs escalables desde lo básico hasta lo avanzado.",
     canonicalUrl: "https://medium.com/@nahueltisera03/backend-developer-p-1-9f6d5079efc0",
-    pubDate: "2026-04-24",
+    pubDate: "2026-04-23",
     author: "Nahuel Tisera",
     categories: ["Analisis de requerimientos", "Backend", "Java", "Spring Boot", "APIs", "Docker"],
     thumbnail: "/images/contenido-uno.png",
+    slug: "apis-escalables-spring-boot"
+  },
+  {
+    id: "2",
+    title: "BACKEND DEVELOPER P.2",
+    description: "Este artículo es la continuación de la primera parte, donde profundizo en aspectos avanzados del desarrollo backend, incluyendo proyectos desafiantes con lógica de negocio integrada.",
+    content: "Este artículo es la continuación de la primera parte, donde profundizo en aspectos avanzados del desarrollo backend, incluyendo proyectos desafiantes con lógica de negocio integrada.",
+    canonicalUrl: "https://medium.com/@nahueltisera03/backend-developer-p-2-aec22d95080c",
+    pubDate: "2026-04-26",
+    author: "Nahuel Tisera",
+    categories: ["Analisis de requerimientos", "Backend", "Java", "Spring Boot", "APIs", "Docker"],
+    thumbnail: "/images/contenido-dos.png",
     slug: "apis-escalables-spring-boot"
   },
 ];
@@ -27,7 +39,7 @@ export const useMediumArticles = () => {
       try {
         // Determine API URL - in dev use localhost:3001, in prod same origin
         const apiBase = import.meta.env.DEV
-          ? "http://localhost:3001"
+          ? ""
           : "";
         const response = await fetch(`${apiBase}/api/medium`);
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowDown, Download } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight, Download } from "lucide-react";
 import heroBgTwo from "@/assets/hero-bg.png";
 
 const roles = [
@@ -81,24 +81,47 @@ const Hero = () => {
           de código y soluciones que escalan.
         </p>
 
-        <div className="animate-fade-up" style={{ animationDelay: "1s" }}>
-          <a
-            href="#projects"
-            className="inline-flex items-center gap-3 px-8 py-3.5 rounded bg-primary text-primary-foreground font-semibold text-sm uppercase tracking-wider hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 font-mono"
-          >
-            Ver proyectos
-            <ArrowDown size={18} />
-          </a>
-
+        <div
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-up"
+          style={{ animationDelay: "1s" }}
+        >
           <a
             href="/cvTiseraNahuel.pdf"
             target="_blank"
-            className="inline-flex items-center gap-3 px-8 py-3.5 rounded bg-primary text-primary-foreground font-semibold text-sm uppercase tracking-wider hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 font-mono ml-4"
+            className="w-full sm:w-auto inline-flex justify-center items-center gap-3 px-8 py-3.5 rounded bg-primary text-primary-foreground font-semibold text-sm uppercase tracking-wider hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 font-mono"
           >
             Descargar CV
             <Download size={18} />
           </a>
+
+          <a
+            href="/my-work"
+            className="w-full sm:w-auto inline-flex justify-center items-center gap-3 px-8 py-3.5 rounded border border-primary text-primary font-semibold text-sm uppercase tracking-wider hover:bg-primary/10 transition-all duration-300 font-mono"
+          >
+            Ver mis trabajos
+            <ArrowRight size={18} />
+          </a>
         </div>
+        {/* <div className="animate-fade-up" style={{ animationDelay: "1s" }}>
+          <a
+            href="/cvTiseraNahuel.pdf"
+            target="_blank"
+            className="inline-flex items-center gap-3 px-8 py-3.5 rounded bg-primary text-primary-foreground font-semibold text-sm uppercase tracking-wider hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 font-mono"
+          >
+            Descargar CV
+            <Download size={18} />
+          </a>
+
+          <a
+            href="/my-work"
+            className="
+            inline-flex items-center gap-3 px-8 py-3.5 rounded bg-primary text-primary-foreground font-semibold text-sm uppercase tracking-wider hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 font-mono ml-4
+    "
+          >
+            Ver mis trabajos
+            <ArrowRight size={18} />
+          </a>
+        </div> */}
       </div>
     </section>
   );

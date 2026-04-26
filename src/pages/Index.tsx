@@ -7,6 +7,7 @@ import WhatIResolve from "@/components/WhatIResolve";
 import ProjectPortal from "@/components/ProjectPortal";
 import Contact from "@/components/Contact";
 import { Terminal } from "lucide-react";
+import AboutSection from "@/components/AboutSection";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
@@ -32,7 +33,7 @@ const Index = () => {
     <div className="min-h-screen">
       <Navbar />
       <Hero />
-      <MediumSection username="nahueltisera03" />
+      <AboutSection />
       <Contact />
 
       <footer className="border-t border-border py-10">

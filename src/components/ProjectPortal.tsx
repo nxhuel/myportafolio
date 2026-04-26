@@ -361,13 +361,21 @@ const ProjectPortal = () => {
 
       {/* Project Showcase Modal */}
       {showcase && (
+        // <div
+        //   className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8"
+        //   onClick={() => setShowcase(null)}
+        // >
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8"
+          className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-4 overflow-y-auto"
           onClick={() => setShowcase(null)}
         >
           <div className="absolute inset-0 bg-background/85 backdrop-blur-xl" />
-          <div
+          {/* <div
             className="relative z-10 w-full max-w-5xl glass rounded-2xl border border-primary/20 overflow-hidden animate-fade-up"
+            onClick={(e) => e.stopPropagation()}
+          > */}
+          <div
+            className="relative z-10 w-full max-w-5xl glass rounded-2xl border border-primary/20 overflow-hidden animate-fade-up my-10"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Media carousel */}
@@ -426,7 +434,7 @@ const ProjectPortal = () => {
 
               <button
                 onClick={() => setShowcase(null)}
-                className="absolute top-4 right-4 w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 w-10 h-10 rounded-full bg-background/80 backdrop-blur flex items-center justify-center text-foreground z-50"
               >
                 <X size={18} />
               </button>
